@@ -1,0 +1,10 @@
+{
+  "hero": true,
+  "brideGroom": true,
+  "venue": true,
+  "liveStream": true,
+  "journey": true,
+  "gallery": true,
+  "waitingForPresence": true,
+  "audioInvite": true
+}

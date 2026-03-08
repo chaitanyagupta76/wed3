@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Home",
+    "brideGroom": "Bride & Groom",
+    "journey": "Our Journey",
+    "venue": "Venue",
+    "liveStream": "Live Stream",
+    "gallery": "Gallery",
+    "rsvp": "RSVP"
+  },
+  "hero": {
+    "title": "THE WEDDING OF",
+    "couple": "Priya & Akash",
+    "date": "December 10, 2026",
+    "cta": "RSVP",
+    "countdown": "Our Wedding Countdown"
+  },
+  "brideGroom": {
+    "title": "BRIDE & GROOM",
+    "bride": {
+      "name": "Priya",
+      "description": "Architect",
+      "parents": "D/O Mr. & Mrs. Sharma"
+    },
+    "groom": {
+      "name": "Akash",
+      "description": "Entrepreneur",
+      "parents": "S/O Mr. & Mrs. Verma"
+    }
+  },
+  "journey": {
+    "title": "OUR JOURNEY",
+    "events": [
+      {
+        "title": "First Meeting",
+        "date": "October 2023",
+        "description": "We met through mutual friends and instantly clicked over a cup of coffee."
+      },
+      {
+        "title": "The Proposal",
+        "date": "February 2025",
+        "description": "A beautiful surprise proposal overlooking the mountains."
+      },
+      {
+        "title": "Engagement",
+        "date": "June 2025",
+        "description": "We officially exchanged rings in the presence of our beloved families."
+      }
+    ]
+  },
+  "venue": {
+    "title": "VENUE",
+    "name": "The Royal Palace",
+    "address": "Agra, India",
+    "date": "10th December, 2026",
+    "time": "6:00 PM",
+    "cta": "GET DIRECTIONS",
+    "mapLink": "https://maps.google.com"
+  },
+  "liveStream": {
+    "title": "LIVE STREAM",
+    "description": "Join us Online\nCeremony at 6:00 PM",
+    "cta": "WATCH LIVE",
+    "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+  },
+  "waitingPresence": {
+    "message": "We are waiting for your presence to bless us on our special day.",
+    "cta": "RSVP NOW",
+    "parentsTitle": "With Blessings Of",
+    "brideParents": {
+      "father": "Mr. Sharma",
+      "mother": "Mrs. Sharma",
+      "label": "Bride's Parents"
+    },
+    "groomParents": {
+      "father": "Mr. Verma",
+      "mother": "Mrs. Verma",
+      "label": "Groom's Parents"
+    }
+  },
+  "gallery": {
+    "title": "GALLERY",
+    "subtitle": "Moments We Cherish"
+  }
+}

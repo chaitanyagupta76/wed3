@@ -1,0 +1,14 @@
+{
+  "siteName": "Premium Wedding Themes",
+  "seoTitle": "Priya & Akash - The Wedding",
+  "seoDescription": "Join us to celebrate the wedding of Priya and Akash",
+  "theme": {
+    "colors": {
+      "primary": "#fdfbf7",
+      "secondary": "#dfb163",
+      "accent": "#d4af37",
+      "textDark": "#4a4a4a",
+      "textLight": "#8b8b8b"
+    }
+  }
+}
