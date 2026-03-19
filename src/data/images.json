@@ -4,6 +4,7 @@
   "groomImage": "/images/groom.png",
   "venueImage": "/images/venue.png",
   "liveStreamImage": "/images/livestream.png",
+  "liveStreamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
   "floralCorner": "/images/floral-corner.png",
   "journeyImages": [
     "/images/journey-meeting.png",

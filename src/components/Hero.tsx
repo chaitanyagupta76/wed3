@@ -188,7 +188,7 @@ export default function Hero() {
                             {content.liveStream.description.split('\n')[1]}
                         </p>
                         <a
-                            href={content.liveStream.embedUrl}
+                            href={images.liveStreamUrl}
                             target="_blank"
                             rel="noreferrer"
                             className="inline-flex items-center gap-2 px-6 py-2 border-2 border-rose text-rose text-xs tracking-[0.15em] uppercase font-semibold rounded-sm hover:bg-rose hover:text-ivory transition-all duration-300"

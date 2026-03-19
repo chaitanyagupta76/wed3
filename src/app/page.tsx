@@ -7,6 +7,7 @@ import Hero from "@/components/Hero";
 import Journey from "@/components/Journey";
 import Gallery from "@/components/Gallery";
 import WaitingPresence from "@/components/WaitingPresence";
+import LiveStream from "@/components/LiveStream";
 import AudioInviteButton from "@/components/AudioInviteButton";
 import SplashScreen from "@/components/SplashScreen";
 import { AnimatePresence, motion } from "framer-motion";
@@ -35,6 +36,7 @@ export default function Home() {
 
         {sectionsConfig.journey && <Journey />}
         {sectionsConfig.gallery && <Gallery />}
+        {sectionsConfig.liveStream && <LiveStream />}
         {sectionsConfig.waitingForPresence && <WaitingPresence />}
 
         {sectionsConfig.audioInvite && <AudioInviteButton />}

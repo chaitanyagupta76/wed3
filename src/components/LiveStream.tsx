@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/LanguageProvider";
 import { motion } from "framer-motion";
+import images from "@/data/images.json";
 
 export default function LiveStream() {
     const { content } = useLanguage();
@@ -36,7 +37,7 @@ export default function LiveStream() {
                     className="relative pb-[56.25%] h-0 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-4 border-gold/20"
                 >
                     <iframe
-                        src={content.liveStream.embedUrl}
+                        src={images.liveStreamUrl}
                         title={content.liveStream.title}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -53,7 +54,7 @@ export default function LiveStream() {
                     className="mt-12"
                 >
                     <a
-                        href={content.liveStream.embedUrl}
+                        href={images.liveStreamUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-block px-10 py-3 bg-gold text-textDark font-medium text-sm tracking-widest uppercase rounded-full hover:bg-rose transition-colors duration-300"
