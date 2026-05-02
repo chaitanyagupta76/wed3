@@ -4,6 +4,13 @@ import { useLanguage } from "@/context/LanguageProvider";
 import images from "@/data/images.json";
 import { motion } from "framer-motion";
 
+const CornerDecor = ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 20 20" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 20V0H20" stroke="currentColor" strokeWidth="1" />
+        <circle cx="2" cy="2" r="1.5" fill="currentColor" />
+    </svg>
+);
+
 export default function WaitingPresence() {
     const { content } = useLanguage();
     const parents = (images as Record<string, unknown>).parents as Record<string, string> | undefined;
@@ -32,92 +39,86 @@ export default function WaitingPresence() {
                             <span className="w-12 h-[1px] bg-gold/50"></span>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl mx-auto">
-                            {/* Bride's Parents */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                className="bg-peach/30 rounded-2xl p-8 border border-champagne/50"
-                            >
-                                <p className="text-xs tracking-[0.15em] uppercase text-gold mb-6 font-sans font-medium">
-                                    {content.waitingPresence.brideParents?.label}
-                                </p>
-                                <div className="flex items-center justify-center gap-6">
-                                    {/* Father */}
-                                    <div className="flex flex-col items-center">
-                                        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gold/30 mb-3 shadow-md">
-                                            <img
-                                                src={parents?.brideFather || "/images/bride-father.png"}
-                                                alt={content.waitingPresence.brideParents?.father}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </div>
-                                        <p className="font-script text-lg text-textDark">
-                                            {content.waitingPresence.brideParents?.father}
-                                        </p>
-                                    </div>
-                                    {/* Divider */}
-                                    <span className="text-gold text-2xl font-light">&</span>
-                                    {/* Mother */}
-                                    <div className="flex flex-col items-center">
-                                        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gold/30 mb-3 shadow-md">
-                                            <img
-                                                src={parents?.brideMother || "/images/bride-mother.png"}
-                                                alt={content.waitingPresence.brideParents?.mother}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </div>
-                                        <p className="font-script text-lg text-textDark">
-                                            {content.waitingPresence.brideParents?.mother}
-                                        </p>
-                                    </div>
-                                </div>
-                            </motion.div>
-
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
                             {/* Groom's Parents */}
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.4 }}
-                                className="bg-peach/30 rounded-2xl p-8 border border-champagne/50"
+                                className="bg-white/40 backdrop-blur-sm rounded-3xl p-10 border border-gold/10 shadow-sm flex flex-col items-center relative overflow-hidden group"
                             >
-                                <p className="text-xs tracking-[0.15em] uppercase text-gold mb-6 font-sans font-medium">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gold/20"></div>
+
+                                <p className="text-xs tracking-[0.2em] uppercase text-gold/80 mb-8 font-sans font-semibold">
                                     {content.waitingPresence.groomParents?.label}
                                 </p>
-                                <div className="flex items-center justify-center gap-6">
-                                    {/* Father */}
-                                    <div className="flex flex-col items-center">
-                                        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gold/30 mb-3 shadow-md">
-                                            <img
-                                                src={parents?.groomFather || "/images/groom-father.png"}
-                                                alt={content.waitingPresence.groomParents?.father}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </div>
-                                        <p className="font-script text-lg text-textDark">
-                                            {content.waitingPresence.groomParents?.father}
-                                        </p>
-                                    </div>
-                                    {/* Divider */}
-                                    <span className="text-gold text-2xl font-light">&</span>
-                                    {/* Mother */}
-                                    <div className="flex flex-col items-center">
-                                        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gold/30 mb-3 shadow-md">
-                                            <img
-                                                src={parents?.groomMother || "/images/groom-mother.png"}
-                                                alt={content.waitingPresence.groomParents?.mother}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </div>
-                                        <p className="font-script text-lg text-textDark">
-                                            {content.waitingPresence.groomParents?.mother}
-                                        </p>
+
+                                {/* Elegant Square photo frame */}
+                                <div className="relative mb-8 p-3">
+                                    {/* Corner Accents */}
+                                    <CornerDecor className="absolute top-0 left-0 w-6 h-6 text-gold/60" />
+                                    <CornerDecor className="absolute top-0 right-0 w-6 h-6 text-gold/60 transform rotate-90" />
+                                    <CornerDecor className="absolute bottom-0 left-0 w-6 h-6 text-gold/60 transform -rotate-90" />
+                                    <CornerDecor className="absolute bottom-0 right-0 w-6 h-6 text-gold/60 transform rotate-180" />
+
+                                    <div className="w-60 h-44 rounded-lg overflow-hidden border border-gold/30 shadow-2xl relative z-10 bg-ivory">
+                                        <div className="absolute inset-0 bg-gold/5 group-hover:bg-transparent transition-colors duration-500 z-20"></div>
+                                        <img
+                                            src={parents?.groomFamily || "/images/groom_family.png"}
+                                            alt={content.waitingPresence.groomParents?.label}
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        />
                                     </div>
                                 </div>
+
+                                <p className="font-script text-lg md:text-2xl text-textDark text-center leading-relaxed flex flex-wrap justify-center items-center">
+                                    <span className="whitespace-nowrap">{content.waitingPresence.groomParents?.father}</span>
+                                    <span className="text-gold/60 mx-2 italic text-lg">&</span>
+                                    <span className="whitespace-nowrap">{content.waitingPresence.groomParents?.mother}</span>
+                                </p>
                             </motion.div>
+
+                            {/* Bride's Parents */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="bg-white/40 backdrop-blur-sm rounded-3xl p-10 border border-gold/10 shadow-sm flex flex-col items-center relative overflow-hidden group"
+                            >
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gold/20"></div>
+
+                                <p className="text-xs tracking-[0.2em] uppercase text-gold/80 mb-8 font-sans font-semibold">
+                                    {content.waitingPresence.brideParents?.label}
+                                </p>
+
+                                {/* Elegant Square photo frame */}
+                                <div className="relative mb-8 p-3">
+                                    {/* Corner Accents */}
+                                    <CornerDecor className="absolute top-0 left-0 w-6 h-6 text-gold/60" />
+                                    <CornerDecor className="absolute top-0 right-0 w-6 h-6 text-gold/60 transform rotate-90" />
+                                    <CornerDecor className="absolute bottom-0 left-0 w-6 h-6 text-gold/60 transform -rotate-90" />
+                                    <CornerDecor className="absolute bottom-0 right-0 w-6 h-6 text-gold/60 transform rotate-180" />
+
+                                    <div className="w-60 h-44 rounded-lg overflow-hidden border border-gold/30 shadow-2xl relative z-10 bg-ivory">
+                                        <div className="absolute inset-0 bg-gold/5 group-hover:bg-transparent transition-colors duration-500 z-20"></div>
+                                        <img
+                                            src={parents?.brideFamily || "/images/bride_family.png"}
+                                            alt={content.waitingPresence.brideParents?.label}
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        />
+                                    </div>
+                                </div>
+
+                                <p className="font-script text-lg md:text-2xl text-textDark text-center leading-relaxed flex flex-wrap justify-center items-center">
+                                    <span className="whitespace-nowrap">{content.waitingPresence.brideParents?.father}</span>
+                                    <span className="text-gold/60 mx-2 italic text-lg">&</span>
+                                    <span className="whitespace-nowrap">{content.waitingPresence.brideParents?.mother}</span>
+                                </p>
+                            </motion.div>
+
+
                         </div>
                     </motion.div>
                 )}
@@ -128,21 +129,26 @@ export default function WaitingPresence() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
+                    className="mt-16"
                 >
-                    <div className="flex justify-center items-center gap-4 mb-8">
-                        <span className="w-16 h-[1px] bg-gold/50"></span>
-                        <span className="w-2 h-2 rounded-full bg-gold"></span>
-                        <span className="w-16 h-[1px] bg-gold/50"></span>
+                    <div className="flex justify-center items-center gap-4 mb-10">
+                        <span className="w-16 h-[1px] bg-gold/30"></span>
+                        <div className="w-2 h-2 rounded-full border border-gold flex items-center justify-center">
+                            <div className="w-0.5 h-0.5 rounded-full bg-gold"></div>
+                        </div>
+                        <span className="w-16 h-[1px] bg-gold/30"></span>
                     </div>
 
-                    <h2 className="font-script text-4xl md:text-5xl text-textDark mb-10 leading-relaxed md:leading-relaxed max-w-3xl mx-auto">
+                    <h2 className="font-script text-xl md:text-5xl text-textDark mb-12 leading-relaxed md:leading-relaxed max-w-3xl mx-auto px-4 whitespace-pre-line">
                         &ldquo;{content.waitingPresence.message}&rdquo;
                     </h2>
 
                     <div className="flex justify-center items-center gap-4">
-                        <span className="w-16 h-[1px] bg-gold/50"></span>
-                        <span className="w-2 h-2 rounded-full bg-gold"></span>
-                        <span className="w-16 h-[1px] bg-gold/50"></span>
+                        <span className="w-16 h-[1px] bg-gold/30"></span>
+                        <div className="w-2 h-2 rounded-full border border-gold flex items-center justify-center">
+                            <div className="w-0.5 h-0.5 rounded-full bg-gold"></div>
+                        </div>
+                        <span className="w-16 h-[1px] bg-gold/30"></span>
                     </div>
                 </motion.div>
             </div>

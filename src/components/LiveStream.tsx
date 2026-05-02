@@ -54,7 +54,7 @@ export default function LiveStream() {
                     className="mt-12"
                 >
                     <a
-                        href={images.liveStreamUrl}
+                        href={images.liveStreamUrl.replace('/embed/', '/watch?v=')}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-block px-10 py-3 bg-gold text-textDark font-medium text-sm tracking-widest uppercase rounded-full hover:bg-rose transition-colors duration-300"

@@ -4,7 +4,7 @@
   "groomImage": "/images/groom.png",
   "venueImage": "/images/venue.png",
   "liveStreamImage": "/images/livestream.png",
-  "liveStreamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  "liveStreamUrl": "https://www.youtube.com/embed/pFnZ_zg9h9s",
   "floralCorner": "/images/floral-corner.png",
   "journeyImages": [
     "/images/journey-meeting.png",
@@ -23,7 +23,9 @@
     "brideFather": "/images/bride-father.png",
     "brideMother": "/images/bride-mother.png",
     "groomFather": "/images/groom-father.png",
-    "groomMother": "/images/groom-mother.png"
+    "groomMother": "/images/groom-mother.png",
+    "brideFamily": "/images/bride_family.png",
+    "groomFamily": "/images/groom_family.png"
   },
   "audioInvitation": "/audio/invitation.mp3"
 }

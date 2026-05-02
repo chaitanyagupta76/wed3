@@ -6,5 +6,5 @@
   "journey": true,
   "gallery": true,
   "waitingForPresence": true,
-  "audioInvite": true
+  "audioInvite": false
 }

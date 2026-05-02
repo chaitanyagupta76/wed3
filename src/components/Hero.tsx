@@ -2,19 +2,28 @@
 
 import { useLanguage } from "@/context/LanguageProvider";
 import images from "@/data/images.json";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
     const { content } = useLanguage();
-    const { scrollY } = useScroll();
-    const y = useTransform(scrollY, [0, 500], [0, 100]);
+
 
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        const targetDate = new Date(content.hero.date).getTime();
+        const dateParts = content.hero.date.split('-');
+        let targetDate = 0;
+
+        if (dateParts.length === 3) {
+            const [day, month, year] = dateParts;
+            // Create a date object in YYYY-MM-DD format which is more reliably parsed
+            targetDate = new Date(`${year}-${month}-${day}T00:00:00`).getTime();
+        } else {
+            targetDate = new Date(content.hero.date).getTime();
+        }
+
         const timer = setTimeout(() => setMounted(true), 0);
 
         const interval = setInterval(() => {
@@ -55,7 +64,7 @@ export default function Hero() {
             {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-ivory via-peach/20 to-champagne/30 -z-10"></div>
 
-            <div className="container mx-auto px-6 max-w-7xl pt-28 pb-8">
+            <div className="container mx-auto px-6 max-w-7xl pt-28 pb-10 md:pb-8">
                 {/* Main Hero: Split Layout */}
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-12 lg:mb-20">
                     {/* Left: Text Content */}
@@ -68,7 +77,7 @@ export default function Hero() {
                         <p className="text-sm md:text-base tracking-[0.25em] uppercase text-textLight mb-4 font-sans">
                             {content.hero.title}
                         </p>
-                        <h1 className="font-script text-6xl md:text-7xl lg:text-8xl text-textDark mb-4 leading-tight">
+                        <h1 className="font-script text-4xl md:text-7xl lg:text-8xl text-textDark mb-4 leading-tight">
                             {content.hero.couple}
                         </h1>
                         <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
@@ -85,14 +94,13 @@ export default function Hero() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.3 }}
-                        style={{ y }}
                         className="lg:w-1/2 relative z-10"
                     >
                         <div className="relative w-full max-w-lg mx-auto">
                             <img
                                 src={images.heroImage}
                                 alt="Wedding Couple"
-                                className="w-full h-auto rounded-tl-[5rem] rounded-br-[5rem] shadow-2xl object-cover"
+                                className="w-full max-h-[480px] lg:max-h-[520px] rounded-tl-[5rem] rounded-br-[5rem] shadow-2xl object-cover"
                             />
                             {/* Gold border accent */}
                             <div className="absolute -inset-2 border-2 border-gold/20 rounded-tl-[5rem] rounded-br-[5rem] -z-10"></div>
@@ -108,7 +116,8 @@ export default function Hero() {
                     className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
                 >
                     {/* Card 1: Bride & Groom */}
-                    <div id="brideGroom" className="bg-ivory rounded-2xl p-6 shadow-md border border-champagne/60 text-center">
+                    <div id="brideGroom" className="bg-ivory rounded-2xl p-5 shadow-md border border-champagne/60 text-center">
+                        {/* Card Header */}
                         <div className="flex items-center justify-center gap-2 mb-5">
                             <span className="w-8 h-[1px] bg-gold/40"></span>
                             <h3 className="text-xs tracking-[0.2em] uppercase text-textLight font-sans font-medium">
@@ -116,22 +125,57 @@ export default function Hero() {
                             </h3>
                             <span className="w-8 h-[1px] bg-gold/40"></span>
                         </div>
-                        <div className="flex items-center justify-center gap-6 mb-4">
-                            <div className="flex flex-col items-center">
-                                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-champagne mb-2">
-                                    <img src={images.brideImage} alt={content.brideGroom.bride.name} className="w-full h-full object-cover" />
+
+                        {/* Profiles Row */}
+                        <div className="flex items-stretch justify-center gap-3">
+                            {/* Groom */}
+                            <div className="flex flex-col items-center flex-1 h-full justify-start min-w-0">
+                                <div
+                                    className="w-full aspect-[3/4] overflow-hidden border-2 border-champagne/80 shadow-sm mb-3"
+                                    style={{ borderRadius: '50% 50% 0 0 / 30% 30% 0 0', transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+                                >
+                                    <img
+                                        src={images.groomImage}
+                                        alt={content.brideGroom.groom.name}
+                                        className="w-full h-full object-cover object-top"
+                                    />
                                 </div>
-                                <p className="font-script text-xl text-textDark">{content.brideGroom.bride.name}</p>
-                                <p className="text-xs text-textLight flex items-center gap-1">
-                                    <span className="text-rose">♥</span> {content.brideGroom.bride.description}
-                                </p>
+                                <span className="text-[9px] tracking-[0.2em] uppercase text-gold font-semibold mb-0.5">{content.brideGroom.groomLabel}</span>
+                                <p className="font-script text-2xl text-textDark leading-tight">{content.brideGroom.groom.name}</p>
+                                <div className="h-[1px] w-8 bg-gold/30 my-1.5 mx-auto"></div>
+                                <div className="text-[10px] text-textLight leading-snug px-1 text-center w-full">
+                                    {content.brideGroom.groom.parents.split('\n').map((line: string, i: number) => (
+                                        <span key={i} className="block whitespace-nowrap">{line.trim()}</span>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="flex flex-col items-center">
-                                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-champagne mb-2">
-                                    <img src={images.groomImage} alt={content.brideGroom.groom.name} className="w-full h-full object-cover" />
+
+                            {/* Heart Divider */}
+                            <div className="flex flex-col items-center justify-center pt-16 px-1 flex-shrink-0">
+                                <span className="text-rose text-lg">❤</span>
+                                <div className="h-10 w-[1px] bg-gold/20 mt-1"></div>
+                            </div>
+
+                            {/* Bride */}
+                            <div className="flex flex-col items-center flex-1 h-full justify-start min-w-0">
+                                <div
+                                    className="w-full aspect-[3/4] overflow-hidden border-2 border-champagne/80 shadow-sm mb-3"
+                                    style={{ borderRadius: '50% 50% 0 0 / 30% 30% 0 0', transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+                                >
+                                    <img
+                                        src={images.brideImage}
+                                        alt={content.brideGroom.bride.name}
+                                        className="w-full h-full object-cover object-top"
+                                    />
                                 </div>
-                                <p className="font-script text-xl text-textDark">{content.brideGroom.groom.name}</p>
-                                <p className="text-xs text-textLight">{content.brideGroom.groom.description}</p>
+                                <span className="text-[9px] tracking-[0.2em] uppercase text-gold font-semibold mb-0.5">{content.brideGroom.brideLabel}</span>
+                                <p className="font-script text-2xl text-textDark leading-tight">{content.brideGroom.bride.name}</p>
+                                <div className="h-[1px] w-8 bg-gold/30 my-1.5 mx-auto"></div>
+                                <div className="text-[10px] text-textLight leading-snug px-1 text-center w-full">
+                                    {content.brideGroom.bride.parents.split('\n').map((line: string, i: number) => (
+                                        <span key={i} className="block whitespace-nowrap">{line.trim()}</span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,36 +208,31 @@ export default function Hero() {
                         </a>
                     </div>
 
-                    {/* Card 3: Live Stream */}
-                    <div id="liveStream" className="bg-ivory rounded-2xl p-6 shadow-md border border-champagne/60 text-center">
+                    {/* Card 3: Reception */}
+                    <div id="reception" className="bg-ivory rounded-2xl p-6 shadow-md border border-champagne/60 text-center">
                         <div className="flex items-center justify-center gap-2 mb-4">
                             <span className="w-8 h-[1px] bg-gold/40"></span>
                             <h3 className="text-xs tracking-[0.2em] uppercase text-textLight font-sans font-medium">
-                                {content.liveStream.title}
+                                {content.reception.title}
                             </h3>
                             <span className="w-8 h-[1px] bg-gold/40"></span>
                         </div>
-                        <div className="relative w-full h-28 rounded-xl overflow-hidden mb-4">
-                            <img src={images.liveStreamImage} alt="Live Stream" className="w-full h-full object-cover" />
-                            {/* Live Badge */}
-                            <div className="absolute top-2 left-2 flex items-center gap-1 bg-red-500/90 text-white text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                                LIVE
-                            </div>
+                        <div className="w-full h-28 rounded-xl overflow-hidden mb-4">
+                            <img src={images.venueImage} alt={content.reception.name} className="w-full h-full object-cover" />
                         </div>
-                        <p className="text-sm text-textDark mb-1 font-medium">
-                            {content.liveStream.description.split('\n')[0]}
-                        </p>
-                        <p className="text-sm text-textDark font-semibold mb-4">
-                            {content.liveStream.description.split('\n')[1]}
-                        </p>
+                        <h4 className="font-script text-2xl text-textDark mb-1">{content.reception.name}</h4>
+                        <p className="text-sm text-textLight mb-2">{content.reception.address}</p>
+                        <div className="flex items-center justify-center gap-4 text-xs text-textLight mb-4">
+                            <span className="flex items-center gap-1">📅 {content.reception.date}</span>
+                            <span className="flex items-center gap-1">⏰ {content.reception.time}</span>
+                        </div>
                         <a
-                            href={images.liveStreamUrl}
+                            href={content.reception.mapLink}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-2 px-6 py-2 border-2 border-rose text-rose text-xs tracking-[0.15em] uppercase font-semibold rounded-sm hover:bg-rose hover:text-ivory transition-all duration-300"
+                            className="inline-block px-6 py-2 border-2 border-textDark text-textDark text-xs tracking-[0.15em] uppercase font-semibold rounded-sm hover:bg-textDark hover:text-ivory transition-all duration-300"
                         >
-                            <span>▶</span> {content.liveStream.cta}
+                            {content.reception.cta}
                         </a>
                     </div>
                 </motion.div>

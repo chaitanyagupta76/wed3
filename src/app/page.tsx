@@ -10,7 +10,9 @@ import WaitingPresence from "@/components/WaitingPresence";
 import LiveStream from "@/components/LiveStream";
 import AudioInviteButton from "@/components/AudioInviteButton";
 import SplashScreen from "@/components/SplashScreen";
+import FallingPetals from "@/components/FallingPetals";
 import { AnimatePresence, motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -22,6 +24,9 @@ export default function Home() {
           <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
         )}
       </AnimatePresence>
+
+      {/* Falling petals — site-wide fixed overlay */}
+      <FallingPetals count={8} />
 
       <motion.main
         initial={{ opacity: 0 }}
@@ -40,6 +45,7 @@ export default function Home() {
         {sectionsConfig.waitingForPresence && <WaitingPresence />}
 
         {sectionsConfig.audioInvite && <AudioInviteButton />}
+        <Footer />
       </motion.main>
     </>
   );

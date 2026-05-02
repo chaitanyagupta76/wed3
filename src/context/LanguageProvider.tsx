@@ -17,17 +17,17 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
     const searchParams = useSearchParams();
-    const [lang, setLang] = useState<Language>("te"); // Default to Telugu
-    const [content, setContent] = useState<ContentType>(teContent);
+    const [lang, setLang] = useState<Language>("en"); // Default to English
+    const [content, setContent] = useState<ContentType>(enContent);
 
     useEffect(() => {
         const queryLang = searchParams?.get("lang");
-        if (queryLang === "en") {
-            setLang("en");
-            setContent(enContent);
-        } else {
+        if (queryLang === "te") {
             setLang("te");
             setContent(teContent);
+        } else {
+            setLang("en");
+            setContent(enContent);
         }
     }, [searchParams]);
 

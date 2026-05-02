@@ -50,6 +50,13 @@ export default function Navbar() {
                         <a
                             key={item.href}
                             href={item.href}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                const target = document.querySelector(item.href);
+                                if (target) {
+                                    target.scrollIntoView({ behavior: "smooth" });
+                                }
+                            }}
                             className="text-xs tracking-[0.15em] uppercase text-textDark hover:text-gold transition-colors font-sans"
                         >
                             {item.label}
@@ -65,13 +72,6 @@ export default function Navbar() {
                         <FiGlobe className="text-sm" />
                         {lang === "en" ? "తెలుగు" : "EN"}
                     </button>
-
-                    <a
-                        href="#rsvp"
-                        className="px-5 py-2 bg-rose text-textDark font-medium text-xs tracking-[0.15em] uppercase rounded-full hover:bg-gold transition-colors hover:text-white"
-                    >
-                        {content.nav.rsvp}
-                    </a>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -97,8 +97,17 @@ export default function Navbar() {
                                 <a
                                     key={item.href}
                                     href={item.href}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="text-sm tracking-widest uppercase text-textDark font-sans"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setIsMobileMenuOpen(false);
+                                        const target = document.querySelector(item.href);
+                                        if (target) {
+                                            setTimeout(() => {
+                                                target.scrollIntoView({ behavior: "smooth" });
+                                            }, 100);
+                                        }
+                                    }}
+                                    className="text-sm tracking-widest uppercase text-textDark font-sans block w-full text-center py-2"
                                 >
                                     {item.label}
                                 </a>
@@ -116,13 +125,7 @@ export default function Navbar() {
                                 {lang === "en" ? "తెలుగు" : "English"}
                             </button>
 
-                            <a
-                                href="#rsvp"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="px-8 py-3 bg-rose text-textDark font-medium text-sm tracking-widest uppercase rounded-full"
-                            >
-                                {content.nav.rsvp}
-                            </a>
+
                         </div>
                     </motion.div>
                 )}

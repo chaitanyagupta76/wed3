@@ -35,7 +35,7 @@ export default function Journey() {
                         return (
                             <div
                                 key={index}
-                                className={`flex flex-col md:flex-row items-center justify-between mb-20 relative ${index % 2 === 0 ? "md:flex-row-reverse" : ""
+                                className={`flex flex-col-reverse md:flex-row items-center justify-between mb-20 relative ${index % 2 === 0 ? "md:flex-row-reverse" : ""
                                     }`}
                             >
                                 {/* Image side */}
@@ -44,14 +44,14 @@ export default function Journey() {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6 }}
-                                    className="md:w-5/12 mb-6 md:mb-0"
+                                    className="w-full md:w-5/12 mt-6 md:mt-0"
                                 >
                                     {journeyImage && (
                                         <div className="overflow-hidden rounded-2xl shadow-lg border-2 border-champagne/30">
                                             <img
                                                 src={journeyImage}
                                                 alt={event.title}
-                                                className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-700"
+                                                className="w-full h-72 md:h-80 object-cover object-top hover:scale-105 transition-transform duration-700"
                                             />
                                         </div>
                                     )}
